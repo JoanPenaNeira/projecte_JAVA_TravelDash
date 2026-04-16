@@ -1,0 +1,822 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --clr-bg: #080a10;
+  --clr-surface: #10131e;
+  --clr-surface-2: #161926;
+  --clr-accent: #4f8ef7;
+  --clr-accent-glow: rgba(79, 142, 247, 0.25);
+  --clr-gold: #e8b84b;
+  --clr-gold-light: #f5d98a;
+  --clr-text: #dde1f0;
+  --clr-muted: #5c6080;
+  --clr-green: #34d399;
+  --radius: 18px;
+  --radius-sm: 10px;
+  --shadow: 0 20px 60px rgba(0,0,0,0.7);
+  --shadow-sm: 0 4px 20px rgba(0,0,0,0.4);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-main: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-numbers: 'Outfit', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--clr-bg); }
+::-webkit-scrollbar-thumb { background: var(--clr-muted); border-radius: 3px; }
+
+/* ══════════════════════════════════════════
+   HEADER — Reimaginat
+══════════════════════════════════════════ */
+.header {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  background: var(--clr-bg);
+  border-bottom: 1px solid rgba(79, 142, 247, 0.1);
+}
+
+.header__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Fons decoratiu del header */
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 120% at 10% 50%, rgba(79,142,247,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 80% at 90% 50%, rgba(232,184,75,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Línies decoratives subtils */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79,142,247,0.4), rgba(232,184,75,0.3), transparent);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header__logo-emblem {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__logo-emblem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(79,142,247,0.2), rgba(232,184,75,0.15));
+  border: 1px solid rgba(79,142,247,0.3);
+}
+
+.header__logo-emblem span {
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.header__logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.header__logo-name {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--clr-text);
+  /* Lletra "T" i "D" en or */
+  background: linear-gradient(135deg, #dde1f0 0%, #dde1f0 30%, var(--clr-gold) 60%, #dde1f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header__logo-tagline {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin-top: 0.1rem;
+}
+
+.header__subtitle {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__subtitle::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--clr-muted);
+}
+
+/* ══════════════════════════════════════════
+   SELECTOR SECTION
+══════════════════════════════════════════ */
+.selector-section {
+  padding: 2.5rem 1.5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.selector-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin-bottom: 0.75rem;
+}
+
+.selector-wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 280px;
+}
+
+.city-select {
+  appearance: none;
+  width: 100%;
+  background: var(--clr-surface);
+  border: 1px solid rgba(79,142,247,0.2);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.85rem 3rem 0.85rem 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  outline: none;
+}
+
+.city-select:focus,
+.city-select:hover {
+  border-color: rgba(79,142,247,0.5);
+  box-shadow: 0 0 0 3px var(--clr-accent-glow);
+}
+
+.city-select option {
+  background: var(--clr-surface);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--clr-accent);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+
+/* ══════════════════════════════════════════
+   LOADING & ERROR STATES — mai visibles per defecte
+══════════════════════════════════════════ */
+.hidden { display: none !important; }
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: var(--clr-muted);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(79,142,247,0.2);
+  border-top-color: var(--clr-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-state {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius-sm);
+  margin: 1rem 1.5rem;
+  color: #fca5a5;
+  max-width: 1100px;
+  margin: 1rem auto;
+}
+
+.error-icon { font-size: 1.2rem; }
+
+/* ══════════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════════ */
+#dashboard {
+  padding-bottom: 3rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════
+   HERO CARD — redissenyat
+══════════════════════════════════════════ */
+.card--hero {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.55);
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+.card--hero:hover .card__bg {
+  transform: scale(1.0);
+}
+
+/* Gradient overlay: de baix cap amunt */
+.card--hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.2) 30%,
+    rgba(0,0,0,0.75) 65%,
+    rgba(8,10,16,0.98) 100%
+  );
+  z-index: 1;
+}
+
+.card__content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Capçalera de la ciutat */
+.city-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.city-name {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.city-flag {
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.city-coords {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.45);
+  margin: 0.4rem 0 0;
+  letter-spacing: 0.05em;
+}
+
+.city-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  margin: 0.5rem 0 1rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* Fila temperatura + descripció */
+.hero-bottom-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-temp {
+  font-family: var(--font-numbers);
+  font-size: 5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--clr-gold);
+  text-shadow: 0 0 40px rgba(232,184,75,0.4);
+  flex-shrink: 0;
+}
+
+.city-description {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.65);
+  margin: 0;
+  max-width: 520px;
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════
+   WIDGETS GRID
+══════════════════════════════════════════ */
+.widgets-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .widgets-grid {
+    grid-template-columns: 1.3fr 1fr;
+  }
+}
+
+/* ══════════════════════════════════════════
+   CARDS GENÈRIQUES
+══════════════════════════════════════════ */
+.card {
+  background: var(--clr-surface);
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.card__title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin: 0 0 1.25rem;
+}
+
+/* ══════════════════════════════════════════
+   WEATHER CARD
+══════════════════════════════════════════ */
+.card--weather {
+  background: linear-gradient(145deg, #111827, #0d1520);
+  border-color: rgba(79,142,247,0.1);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.weather-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(79,142,247,0.3));
+}
+
+.weather-temp {
+  font-family: var(--font-numbers);
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--clr-text);
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.weather-details > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.weather-details > div span:last-child {
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--clr-accent);
+}
+
+.rain-bar-track {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.rain-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#rainLabel {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════
+   CURRENCY CARD
+══════════════════════════════════════════ */
+.card--currency {
+  background: linear-gradient(145deg, #0e1a14, #111d17);
+  border-color: rgba(52,211,153,0.1);
+}
+
+#exchangeRate {
+  font-size: 0.85rem;
+  color: var(--clr-muted);
+  margin-bottom: 1.25rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(52,211,153,0.05);
+  border: 1px solid rgba(52,211,153,0.15);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+}
+
+#amountInput {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm);
+  color: var(--clr-text);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+#amountInput:focus {
+  border-color: var(--clr-green);
+  box-shadow: 0 0 0 3px rgba(52,211,153,0.1);
+}
+
+.currency-result {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(52,211,153,0.05);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(52,211,153,0.1);
+  margin-top: 0.75rem;
+}
+
+.currency-result > div:first-child {
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+#resultFrom, #resultTo {
+  font-family: var(--font-mono);
+}
+
+#resultAmount {
+  font-family: var(--font-numbers);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--clr-green);
+  line-height: 1;
+}
+
+#currencyNote {
+  font-size: 0.7rem;
+  color: var(--clr-muted);
+  margin: 0.75rem 0 0;
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════
+   TIP CARD
+══════════════════════════════════════════ */
+.card--tip {
+  background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(124,58,237,0.12));
+  border-color: rgba(79,142,247,0.2);
+  color: var(--clr-text);
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+}
+
+#tipIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(79,142,247,0.4));
+}
+
+#tipText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  font-weight: 300;
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+  color: var(--clr-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  margin-top: 2rem;
+}
+
+
+/* ══════════════════════════════════════════
+   Animacions d'entrada escalonades
+══════════════════════════════════════════ */
+@keyframes fadeUpIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card--weather {
+  animation: fadeUpIn 0.5s ease both;
+  animation-delay: 0.1s;
+}
+
+.card--currency {
+  animation: fadeUpIn 0.5s ease both;
+  animation-delay: 0.2s;
+}
+
+.card--tip {
+  animation: fadeUpIn 0.5s ease both;
+  animation-delay: 0.3s;
+}
+
+/* ══════════════════════════════════════════
+   Indicador visual del temps
+══════════════════════════════════════════ */
+.weather-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  font-size: 2.8rem;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ══════════════════════════════════════════
+   Responsive mobile
+══════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* Header compacte */
+  .header__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.25rem 1.25rem;
+  }
+
+  .header__subtitle {
+    display: none;
+  }
+
+  .header__logo-name {
+    font-size: 1.5rem;
+  }
+
+  /* Selector a tota l'amplada */
+  .selector-section {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .selector-wrapper {
+    width: 100%;
+  }
+
+  .city-select {
+    width: 100%;
+  }
+
+  /* Hero card: columna en comptes de fila */
+  .card--hero {
+    min-height: 480px;
+  }
+
+  .hero-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .hero-temp {
+    font-size: 3.5rem;
+  }
+
+  .city-name {
+    font-size: 2.2rem;
+  }
+
+  .city-description {
+    max-width: 100%;
+    font-size: 0.78rem;
+  }
+
+  /* Grid en una sola columna */
+  .widgets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Cards amb menys padding */
+  .card {
+    padding: 1.25rem;
+  }
+
+  /* Tip card en columna */
+  .card--tip {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Container sense padding lateral excessiu */
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* ══════════════════════════════════════════
+   COMMIT 4 — Pantalla de benvinguda
+══════════════════════════════════════════ */
+.welcome-screen {
+  padding: 2rem 0 3rem;
+  animation: fadeUpIn 0.5s ease both;
+}
+
+.welcome-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin: 0 0 1.25rem;
+  padding: 0 1.5rem;
+}
+
+.welcome-cities {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0 1.5rem;
+}
+
+.city-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--clr-surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  flex: 1;
+  min-width: 120px;
+}
+
+.city-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79,142,247,0.4);
+  box-shadow: 0 12px 32px rgba(79,142,247,0.15);
+}
+
+.city-card__flag {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.city-card__name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--clr-text);
+}
+
+@media (max-width: 600px) {
+  .welcome-cities {
+    gap: 0.75rem;
+  }
+  .city-card {
+    padding: 1.25rem 1rem;
+    min-width: 100px;
+  }
+}

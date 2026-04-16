@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>TravelDash</title>
+  <link rel="stylesheet" href="/02_Practica_JAVA_Joan_Peña/travel_dashboard/style/style.css" />
+</head>
+<body>
+
+<!-- HEADER — Redissenyat -->
+<header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <div class="header__logo-emblem">
+        <span>✈️</span>
+      </div>
+      <div class="header__logo-wordmark">
+        <span class="header__logo-name">TravelDash</span>
+        <span class="header__logo-tagline">Your window to the world</span>
+      </div>
+    </div>
+    <p class="header__subtitle">La teva finestra al món</p>
+  </div>
+</header>
+
+<!-- SELECTOR -->
+<section class="selector-section">
+  <div class="container">
+    <label class="selector-label">🗺️ Selecciona la teva destinació</label>
+    <div class="selector-wrapper">
+      <select id="citySelect" class="city-select">
+        <option value="">— Tria una ciutat —</option>
+        <option value="barcelona">Barcelona</option>
+        <option value="london">London</option>
+        <option value="paris">Paris</option>
+        <option value="newyork">New York</option>
+        <option value="tokyo">Tokyo</option>
+      </select>
+      <span class="select-arrow">▾</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOADING STATE — ocult al centre, no al layout principal -->
+<div id="loadingState" class="loading-state hidden">
+  <div class="spinner"></div>
+  <p>Carregant dades...</p>
+</div>
+
+<!-- ERROR STATE -->
+<div id="errorState" class="error-state hidden">
+  <span class="error-icon">⚠️</span>
+  <p id="errorMessage"></p>
+</div>
+
+<!--  Pantalla de benvinguda -->
+<section id="welcomeScreen" class="welcome-screen">
+  <div class="container">
+    <p class="welcome-label">✦ On vols anar avui?</p>
+    <div class="welcome-cities">
+      <button class="city-card" data-city="barcelona">
+        <span class="city-card__flag">🇪🇸</span>
+        <span class="city-card__name">Barcelona</span>
+      </button>
+      <button class="city-card" data-city="london">
+        <span class="city-card__flag">🇬🇧</span>
+        <span class="city-card__name">London</span>
+      </button>
+      <button class="city-card" data-city="paris">
+        <span class="city-card__flag">🇫🇷</span>
+        <span class="city-card__name">Paris</span>
+      </button>
+      <button class="city-card" data-city="newyork">
+        <span class="city-card__flag">🇺🇸</span>
+        <span class="city-card__name">New York</span>
+      </button>
+      <button class="city-card" data-city="tokyo">
+        <span class="city-card__flag">🇯🇵</span>
+        <span class="city-card__name">Tokyo</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<main id="dashboard" class="dashboard hidden">
+  <div class="container">
+
+    <!-- HERO CARD -->
+    <section class="card card--hero">
+      <div class="card__bg" id="cardBg"></div>
+      <div class="card__content">
+
+        <!-- Capçalera: nom + bandera -->
+        <div class="city-header">
+          <div>
+            <h2 id="cityName" class="city-name"></h2>
+            <p id="cityCoords" class="city-coords"></p>
+          </div>
+          <div id="cityFlag" class="city-flag"></div>
+        </div>
+
+        <!-- País i moneda -->
+        <div class="city-meta">
+          <span id="cityCountry"></span>
+          <span>·</span>
+          <span id="cityCurrency"></span>
+        </div>
+
+        <!-- Fila inferior: temperatura + descripció -->
+        <div class="hero-bottom-row">
+          <div id="heroTemp" class="hero-temp"></div>
+          <p id="cityDescription" class="city-description"></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GRID DE WIDGETS -->
+    <div class="widgets-grid">
+
+      <!-- METEOROLOGIA -->
+      <section class="card card--weather">
+        <h3 class="card__title">🌤️ Meteorologia</h3>
+
+        <div class="weather-main">
+          <div id="weatherIcon" class="weather-icon"></div>
+          <div>
+            <span id="weatherTemp" class="weather-temp"></span>
+            <span style="font-size:1.5rem; color: var(--clr-muted);">°C</span>
+          </div>
+        </div>
+
+        <div class="weather-details">
+          <div><span>💧 Probabilitat de pluja</span><span id="rainProb"></span></div>
+          <div><span>🌡️ Sensació tèrmica</span><span id="feelsLike"></span></div>
+          <div><span>💨 Vent</span><span id="windSpeed"></span></div>
+        </div>
+
+        <div class="rain-bar-track">
+          <div id="rainBarFill" class="rain-bar-fill"></div>
+        </div>
+        <div id="rainLabel"></div>
+      </section>
+
+      <!-- CONVERSIÓ DE MONEDA -->
+      <section class="card card--currency">
+        <h3 class="card__title">💱 Conversió de moneda</h3>
+
+        <div id="exchangeRate"></div>
+
+        <input id="amountInput" type="number" value="100" min="0" placeholder="Import en EUR" />
+
+        <div class="currency-result">
+          <div>
+            <span id="resultFrom"></span> → <span id="resultTo"></span>
+          </div>
+          <div id="resultAmount"></div>
+        </div>
+
+        <p id="currencyNote"></p>
+      </section>
+
+    </div>
+
+    <!-- TIP DE VIATGE -->
+    <section class="card card--tip">
+      <span id="tipIcon"></span>
+      <p id="tipText"></p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  TravelDash · Open-Meteo · Frankfurter API
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
